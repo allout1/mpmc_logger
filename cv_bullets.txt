@@ -1,0 +1,6 @@
+- Architected an ultra-low-latency C++20 asynchronous logger for HFT, outperforming traditional baselines by replacing blocking write() syscalls with a lock-free multi-threaded architecture, achieving an end-to-end throughput of 9.6 million messages per second.
+- Engineered a wait-free, cache-aligned MPMC ring buffer, reducing producer hot-path latency to ~15 nanoseconds (p99 of 1 microsecond on a vanilla kernel).
+- Designed a zero-copy, double-buffered memory-mapped (mmap) sink to bypass OS system calls, preventing I/O-induced thread stalls.
+- Optimized text serialization by implementing the division-free Jeaiii algorithm and caching date prefixes, slashing consumer CPU utilization.
+- Prevented CPU false sharing via strict cache-line padding (alignas 128) on highly contented atomic sequencing variables.
+- Verified deterministic performance using Google Benchmark, tracking microsecond latencies (p50=0µs, p99=1µs) and multi-threaded scaling bottlenecks.

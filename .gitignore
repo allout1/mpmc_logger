@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+
+# Build directories
+build/
+.cache/
+
+# Compiled object files
+*.o
+
+# Executables
+a.out
+bench_rdtsc
+bench_logger_e2e
+log_reader
+log_stats
+test_*
+
+# Temporary test source files
+test_cxx20.cpp
+
+# Makefiles/CMake generated files (if any are at root, though mostly in build/)
+compile_commands.json
+
+# Scratch files
+*.log

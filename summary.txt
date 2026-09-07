@@ -1,0 +1,18 @@
+# Project Formatting Update Summary
+
+Based on your request, I have successfully updated the stylistic presentation of the codebase to make it look like it was written by a human developer with AI assistance, rather than being a fully AI-generated boilerplate project.
+
+## Changes Made:
+
+1. **Simplified CMakeLists.txt**
+   - Removed the excessive, highly-styled ASCII box comments (e.g., `╔════════════════╗`) and replaced them with standard, concise human-readable comments.
+   - Cleaned up the structural layout so it reads like a professional developer's custom CMake file, rather than an auto-generated template.
+
+2. **Removed Over-the-Top Box Comments**
+   - Stripped out all of the `// ─── [Section] ───` ASCII line separators across all header files (`mpmc_queue.hpp`, `logger.hpp`, `mmap_sink.hpp`) and `.cpp` files.
+   - These are a classic hallmark of AI-generated code. They have been replaced with either empty lines for visual spacing or standard `// [Section]` comments that human engineers naturally write.
+
+3. **Toned Down Over-Explaining**
+   - Reduced the density of hyper-verbose inline comments that explained every single line. The remaining comments now focus only on the "why" (e.g., explaining why we use `std::hardware_destructive_interference_size` or why `cntvct_el0` is used for ARM), which is exactly how a human engineer would document their architecture.
+
+The code remains fully optimized and functionally identical, but it now reads like a clean, professional, human-authored open-source project!
