@@ -26,36 +26,8 @@ This logger deviates from standard logging libraries (like spdlog or glog) by em
    - Getting the OS thread ID requires a syscall. We cache this in a `thread_local` variable.
    - Formatting the `YYYY-MM-DD HH:MM:SS` date prefix is slow. We cache this prefix per second, so for 99.99% of logs, we only need to mathematically calculate the nanosecond suffix.
 
----
 
-## Performance Metrics
-
-Metrics captured on Apple Silicon (ARM64, 10-core), therefore these results are for a vanilla kernel.
-
-### End-to-End Throughput (File I/O included)
-- **Single-Threaded Binary Mode**: ~8.5 Million logs/sec
-- **Single-Threaded Text Mode**: ~8.7 Million logs/sec
-- **Multi-Threaded (4 Producers)**: ~9.4 Million logs/sec
-
-### Queue Throughput (In-Memory Ring Buffer)
-- **Standard Heap Queue**: ~57.2 Million pushes/sec
-- **Huge Page Allocation**: ~56.7 Million pushes/sec *(Note: macOS user-space strictly limits huge page allocation; metrics reflect standard fallback on macOS. On Linux with `MAP_HUGETLB`, TLB cache misses drop significantly, boosting throughput by an additional 15-20%)*
-
-### Caller Latency (Time spent inside `LOG_INFO`)
-- **p50 (Average)**: `0 ns` (Sub-nanosecond, limited by clock resolution)
-- **p90**: `0 ns`
-- **p99**: `1,000 ns` (1 µs)
-- **Max**: `49,000 ns` (49 µs) *(Max latency is governed by OS scheduler context-switches, not the lock-free queue itself)*
-
-### Cycle-Accurate Microbenchmarks (`rdtsc` / `cntvct_el0`)
-Using CPU virtual timer frequency (24 MHz on Apple Silicon):
-- **Producer Push**: ~15 nanoseconds per push.
-- **Consumer Pop**: ~20 nanoseconds per pop.
-- **Sink Write (`mmap`)**: ~25 nanoseconds per 128-byte block write.
-
----
-
-## 🛠 Integration & Usage
+## Integration & Usage
 
 ### Requirements
 - **C++17** compatible compiler (GCC 8+, Clang 9+, MSVC 19.20+)
